@@ -1,5 +1,6 @@
 <?php
 require_once "../lib/CarnivorousBeehive/Router.php";
+require_once "../lib/CarnivorousBeehive/renderer.php";
 
 use CarnivorousBeehive\Router;
 
@@ -15,10 +16,10 @@ $router->get('/hello', function ($args) {
     }
 });
 $router->get('/hello/:name', function ($args) {
-    echo "You made it";
+    render_view('hello/show', $args);
 });
 $router->notFound(function () {
-    include "../public/404.php";
+    render_view('404');
 });
 
 return $router;

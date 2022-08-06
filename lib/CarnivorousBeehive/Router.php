@@ -90,13 +90,13 @@ class Router {
             preg_match("/$re$/", $path, $matches);
             if (count($matches) > 0) {
                 $parameter = array_combine(
-                    $arg,
+                    str_replace(':', '', $arg),
                     array($matches[count($matches) - 1]),
                 );
                 return array($route, $parameter);
             }
         }
 
-        return array();
+        return array(null, null);
     }
 }
