@@ -10,7 +10,7 @@ class Router {
         $this->routes = array();
     }
 
-    public function static(string $dir): self {
+    public function assets(string $dir): self {
         $this->staticDirectory = $dir;
 
         return $this;

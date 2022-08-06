@@ -6,7 +6,7 @@ use CarnivorousBeehive\Router;
 
 $router = new Router;
 
-$router->static(realpath('../public'));
+$router->assets(realpath('../public/assets'));
 $router->get('/', function () { phpinfo(); });
 $router->get('/hello', function ($args) {
     if (array_key_exists('name', $args)) {
