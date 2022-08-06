@@ -30,9 +30,7 @@ class Router {
         $request = parse_url($_SERVER['REQUEST_URI']);
         $method = $_SERVER['REQUEST_METHOD'];
 
-        $args = array_merge(
-            array_key_exists('query', $request) ? $this->getQueryStringArgs($request['query']) : array(),
-        );
+        $args = array_key_exists('query', $request) ? $this->getQueryStringArgs($request['query']) : array();
 
         [$matched_path, $parameters] = $this->matchedPath($request['path']);
 
