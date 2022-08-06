@@ -4,6 +4,7 @@ services:
     image: php:fpm
     volumes:
       - ./:/var/www/html/
+      - ./config/php.ini:/usr/local/etc/php/conf.d/php.ini
     ports:
       - "9000"
   nginx:

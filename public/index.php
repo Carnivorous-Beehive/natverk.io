@@ -1,3 +1,5 @@
 <?php
 
-    echo "yo dawg";
+$router = require_once "../config/routes.php";
+
+$router->handle();
