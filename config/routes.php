@@ -7,7 +7,13 @@ $router = new Router;
 
 $router->static(realpath('../public'));
 $router->get('/', function () { phpinfo(); });
-$router->get('/hello', function () { echo "world"; });
+$router->get('/hello', function ($args) {
+    if (array_key_exists('name', $args)) {
+        echo "Hello, " . $args['name'] . "!";
+    } else {
+        echo "Hello, stranger!";
+    }
+});
 $router->notFound(function () {
     include "../public/404.php";
 });

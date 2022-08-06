@@ -27,16 +27,20 @@ class Router {
     }
 
     public function handle() {
-        $uri = $_SERVER['REQUEST_URI'];
+        $request = parse_url($_SERVER['REQUEST_URI']);
         $method = $_SERVER['REQUEST_METHOD'];
 
-        if (!$this->isRouteHandled($method, $uri)) {
+        $args = array_merge(
+            array_key_exists('query', $request) ? $this->getQueryStringArgs($request['query']) : array(),
+        );
+
+        if (!$this->isRouteHandled($method, $request['path'])) {
             http_response_code(404);
             call_user_func($this->routes[404]);
             die();
         }
 
-        call_user_func($this->routes[$uri][$method]);
+        call_user_func($this->routes[$request['path']][$method], $args);
         die();
     }
 
@@ -49,5 +53,13 @@ class Router {
     private function isRouteHandled(string $verb, string $path): bool {
         return array_key_exists($path, $this->routes) &&
             array_key_exists($verb, $this->routes[$path]);
+    }
+
+    private function getQueryStringArgs(string $qs): array {
+        return array_reduce(explode('&', $qs), function ($hash, $pair) {
+           [$key, $value] = explode('=', $pair);
+           $hash[$key] = $value;
+           return $hash;
+        });
     }
 }
