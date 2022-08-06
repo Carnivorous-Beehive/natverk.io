@@ -14,6 +14,9 @@ $router->get('/hello', function ($args) {
         echo "Hello, stranger!";
     }
 });
+$router->get('/hello/:name', function ($args) {
+    echo "You made it";
+});
 $router->notFound(function () {
     include "../public/404.php";
 });
