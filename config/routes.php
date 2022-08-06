@@ -1,6 +1,6 @@
 <?php
-require_once "../lib/CarnivorousBeehive/Router.php";
-require_once "../lib/CarnivorousBeehive/renderer.php";
+require_once LIB_PATH . "/CarnivorousBeehive/Router.php";
+require_once LIB_PATH . "/CarnivorousBeehive/renderer.php";
 require_once APP_PATH . "/controllers/require.php";
 
 use CarnivorousBeehive\Router;
