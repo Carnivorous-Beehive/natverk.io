@@ -16,7 +16,18 @@ class Router {
         return $this;
     }
 
-    public function get(string $path, callable $handler): self {
+    public function get(string $path, $handler): self {
+        if (!is_callable($handler)) {
+            switch(gettype($handler)) {
+                case 'array':
+                    [$class, $method] = $handler;
+                    $handler = array(new $class, $method);
+                    break;
+                default:
+                    throw new Exception("Handler cannot be processed");
+            }
+        }
+
         return $this->registerRoute('GET', $path, $handler);
     }
 
@@ -45,7 +56,7 @@ class Router {
         die();
     }
 
-    private function registerRoute(string $verb, string $path, callable $handler): self {
+    private function registerRoute(string $verb, string $path, $handler): self {
         $this->routes[$path][$verb] = $handler;
 
         return $this;

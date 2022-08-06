@@ -1,6 +1,7 @@
 <?php
 require_once "../lib/CarnivorousBeehive/Router.php";
 require_once "../lib/CarnivorousBeehive/renderer.php";
+require_once APP_PATH . "/controllers/require.php";
 
 use CarnivorousBeehive\Router;
 
@@ -15,9 +16,7 @@ $router->get('/hello', function ($args) {
         echo "Hello, stranger!";
     }
 });
-$router->get('/hello/:name', function ($args) {
-    render_view('hello/show', $args);
-});
+$router->get('/hello/:name', [Natverk\Controllers\HelloController::class, 'show']);
 $router->notFound(function () {
     render_view('404');
 });
