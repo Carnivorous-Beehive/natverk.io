@@ -1,5 +1,8 @@
 <?php
+
 namespace Natverk\Controllers;
+
+$db = require_once CONFIG_PATH . '/database.php';
 
 class HelloController extends ApplicationController
 {
