@@ -17,6 +17,10 @@ $router->get('/hello', function ($args) {
     }
 });
 $router->get('/hello/:name', [Natverk\Controllers\HelloController::class, 'show']);
+
+$router->get('/users', [Natverk\Controllers\UsersController::class, 'index']);
+$router->get('/users/:username', [Natverk\Controllers\UsersController::class, 'show']);
+
 $router->notFound(function () {
     render_view('404');
 });

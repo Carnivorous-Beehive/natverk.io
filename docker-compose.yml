@@ -42,4 +42,4 @@ services:
       - MYSQL_USER=mysql
       - MYSQL_PASSWORD=mysql
     ports:
-      - "3306"
+      - "3306:3306"
