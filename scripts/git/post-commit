@@ -1,0 +1,10 @@
+#!/bin/sh
+echo
+if [ -e .commit ]
+   then
+   rm .commit
+   ../write_database_schema.sh
+   git add ../../database/schema.sql
+   git commit --amend -C HEAD --no-verify
+fi
+exit

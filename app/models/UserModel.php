@@ -2,8 +2,6 @@
 
 namespace Natverk\Models;
 
-require_once APP_PATH . '/models/Model.php';
-
 use \DateTime;
 
 /**

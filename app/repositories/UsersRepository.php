@@ -2,9 +2,6 @@
 
 namespace Natverk\Repositories;
 
-require_once APP_PATH . '/repositories/Repository.php';
-require_once APP_PATH . '/models/UserModel.php';
-
 use \PDO;
 use Natverk\Models\UserModel;
 
