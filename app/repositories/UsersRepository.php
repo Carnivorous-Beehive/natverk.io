@@ -52,4 +52,23 @@ class UsersRepository extends Repository
 
         return $users;
     }
+
+    public function getUserByUsername(string $username): UserModel
+    {
+        $query = $this->connection()->prepare('
+            SELECT username, hashed_password, registered_at FROM users WHERE username = :username
+        ');
+
+        $query->execute(array('username' => $username));
+        $row = $query->fetch();
+
+        $registeredAt = new \DateTime();
+        $registeredAt->setTimeStamp((int) $row['registered_at']);
+
+        return new UserModel(
+            username: $row['username'],
+            hashedPassword: $row['hashed_password'],
+            registeredAt: $registeredAt,
+        );
+    }
 }

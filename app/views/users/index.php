@@ -1,7 +1,7 @@
 <ul>
     <? foreach ($users as $user) { ?>
     <li>
-        <? echo $user->username ?>
+        <a href="/users/<?= $user->username ?>"><?= $user->username ?></a>
     </li>
     <? } ?>
 </ul>

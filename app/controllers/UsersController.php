@@ -2,12 +2,12 @@
 
 namespace Natverk\Controllers;
 
-require_once APP_PATH . '/repositories/UsersRepository.php';
-
 use Natverk\Repositories\UsersRepository;
 
 class UsersController extends ApplicationController
 {
+    private UsersRepository $usersRepository;
+
     public function __construct()
     {
         // TODO: This really needs to be injeted into the controller
@@ -27,7 +27,11 @@ class UsersController extends ApplicationController
         $this->render('users/index', array('users' => $users));
     }
 
-    public function show()
+    public function show($params)
     {
+        $this->render(
+            'users/show',
+            array('user' => $this->usersRepository->getUserByUsername($params['username']))
+        );
     }
 }
