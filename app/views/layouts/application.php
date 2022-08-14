@@ -11,7 +11,7 @@
 </body>
 
 <script type="module">
-    import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
+    import hotwiredTurbo from 'https://cdn.skypack.dev/pin/@hotwired/turbo@v7.1.0-V83RMQBlYCPK9CvTqQoL/mode=imports,min/optimized/@hotwired/turbo.js';
 </script>
 
 </html>
