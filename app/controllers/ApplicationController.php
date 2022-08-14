@@ -10,12 +10,13 @@ abstract class ApplicationController
 {
     protected $layout;
 
-    public function render(string $path, array $args = array())
+    public function render(string $path, array $params = array())
     {
         render_view(
             template: $path,
-            args: $args,
+            params: $params,
             layout: $this->getLayout(),
+            sitename: 'Natverk.io',
         );
     }
 

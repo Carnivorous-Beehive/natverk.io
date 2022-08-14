@@ -41,7 +41,7 @@ class Router {
         $request = parse_url($_SERVER['REQUEST_URI']);
         $method = $_SERVER['REQUEST_METHOD'];
 
-        $args = array_key_exists('query', $request) ? $this->getQueryStringArgs($request['query']) : array();
+        $params = array_key_exists('query', $request) ? $this->getQueryStringArgs($request['query']) : array();
 
         [$matched_path, $parameters] = $this->matchedPath($request['path']);
 
@@ -51,8 +51,8 @@ class Router {
             die();
         }
 
-        $args = array_merge($args, $parameters);
-        call_user_func($this->routes[$matched_path][$method], $args);
+        $params = array_merge($params, $parameters);
+        call_user_func($this->routes[$matched_path][$method], $params);
         die();
     }
 

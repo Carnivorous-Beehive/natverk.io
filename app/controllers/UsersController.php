@@ -15,23 +15,24 @@ class UsersController extends ApplicationController
         $this->usersRepository = new UsersRepository($db);
     }
 
-    public function index($args)
+    public function index($params)
     {
-        $page = array_key_exists('page', $args) ?? (int) $args['page'];
-        $size = array_key_exists('size', $args) ?? (int) $args['size'];
+        $page = array_key_exists('page', $params) ?? (int) $params['page'];
+        $size = array_key_exists('size', $params) ?? (int) $params['size'];
         $users = $this->usersRepository->getAllUsers(
             page: $page,
             size: $size,
         );
 
-        $this->render('users/index', array('users' => $users));
+        $this->render('users/index', array('users' => $users, 'title' => 'Users'));
     }
 
     public function show($params)
     {
+        $user = $this->usersRepository->getUserByUsername($params['username']);
         $this->render(
             'users/show',
-            array('user' => $this->usersRepository->getUserByUsername($params['username']))
+            array('user' => $user, 'title' => array($user->username, 'Users')),
         );
     }
 }
