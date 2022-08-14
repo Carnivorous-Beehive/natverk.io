@@ -19,7 +19,7 @@ class Database
 
     public static function getInstance(): PDO
     {
-        if (!isset(static::$database)) {
+        if (!isset(self::$database)) {
             $host = getenv('DB_HOST');
             $user = getenv('DB_USER');
             $pass = getenv('DB_PASS');
