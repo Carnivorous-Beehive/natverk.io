@@ -33,7 +33,7 @@ class UsersRepository extends Repository
 
         // TODO: don't use offset pagination
         $query = $this->connection()->prepare(
-            "SELECT username, hashed_password, registered_at FROM users ORDER BY id LIMIT :offset, :limit"
+            "SELECT id, username, hashed_password, registered_at FROM users ORDER BY id LIMIT :offset, :limit"
         );
         $query->bindValue('offset', ($validPage - 1) * $validSize, PDO::PARAM_INT);
         $query->bindValue('limit', $validSize, PDO::PARAM_INT);
@@ -41,12 +41,11 @@ class UsersRepository extends Repository
 
         $users = array();
         while ($row = $query->fetch()) {
-            $registeredAt = new \DateTime();
-            $registeredAt->setTimeStamp((int) $row['registered_at']);
             $users[] = new UserModel(
+                id: (int) $row['id'],
                 username: $row['username'],
                 hashedPassword: $row['hashed_password'],
-                registeredAt: $registeredAt,
+                registeredAt: $this->registeredAtDateTime($row['registered_at']),
             );
         }
 
@@ -56,19 +55,24 @@ class UsersRepository extends Repository
     public function getUserByUsername(string $username): UserModel
     {
         $query = $this->connection()->prepare('
-            SELECT username, hashed_password, registered_at FROM users WHERE username = :username
+            SELECT id, username, hashed_password, registered_at FROM users WHERE username = :username
         ');
 
         $query->execute(array('username' => $username));
         $row = $query->fetch();
 
-        $registeredAt = new \DateTime();
-        $registeredAt->setTimeStamp((int) $row['registered_at']);
-
         return new UserModel(
+            id: (int) $row['id'],
             username: $row['username'],
             hashedPassword: $row['hashed_password'],
-            registeredAt: $registeredAt,
+            registeredAt: $this->registeredAtDateTime($row['registered_at']),
         );
+    }
+
+    private function registeredAtDateTime(string $timestamp): \DateTime
+    {
+        $registeredAt = new \DateTime;
+        $registeredAt->setTimestamp((int) $timestamp);
+        return $registeredAt;
     }
 }

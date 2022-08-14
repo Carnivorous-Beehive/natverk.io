@@ -16,6 +16,10 @@ function render_view(string $template, array $params = array(), $layout = null, 
         $title = $sitename;
     }
 
+    if (!array_key_exists('styles', $params)) {
+        $params['styles'] = array();
+    }
+
     $template = APP_PATH . '/views/' . $template . '.php';
 
     if (!is_null($layout)) {

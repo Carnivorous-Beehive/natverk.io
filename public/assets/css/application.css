@@ -10,3 +10,11 @@ h5,
 h6 {
     font-family: 'PT Sans Narrow', sans-serif;
 }
+
+.full-height {
+    height: 100vh;
+}
+
+.error {
+    color: darkred;
+}

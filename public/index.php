@@ -9,4 +9,5 @@ require_once APP_PATH . '/repositories/require.php';
 
 $router = require_once "../config/routes.php";
 
+session_start();
 $router->handle();

@@ -10,6 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=PT+Sans+Narrow&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css">
     <link rel="stylesheet" href="/css/application.css" type="text/css">
+    <? foreach ($params['styles'] as $style) { ?>
+    <link rel="stylesheet" href="/css/<?= $style ?>.css" type="text/css">
+    <? } ?>
 </head>
 
 <body>

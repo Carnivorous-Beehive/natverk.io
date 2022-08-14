@@ -20,6 +20,13 @@ abstract class ApplicationController
         );
     }
 
+    public function validateCSRF($csrf): void
+    {
+        if (empty($csrf) || !hash_equals($_SESSION['csrf'], $csrf)) {
+            throw new \Error('Cross Site Request Forgery detected');
+        }
+    }
+
     protected function setLayout(string $layout): self
     {
         $this->layout = $layout;
