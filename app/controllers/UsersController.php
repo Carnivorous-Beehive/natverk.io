@@ -10,9 +10,7 @@ class UsersController extends ApplicationController
 
     public function __construct()
     {
-        // TODO: This really needs to be injeted into the controller
-        include CONFIG_PATH . '/database.php';
-        $this->usersRepository = new UsersRepository($db);
+        $this->usersRepository = new UsersRepository;
     }
 
     public function index($params)
