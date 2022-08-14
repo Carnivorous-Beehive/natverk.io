@@ -35,4 +35,14 @@ class UsersController extends ApplicationController
             array('user' => $user, 'title' => array($user->username, 'Users')),
         );
     }
+
+    public function new()
+    {
+        $this->render('users/new', array('title' => 'Register'));
+    }
+
+    public function create($params)
+    {
+        die($params);
+    }
 }
